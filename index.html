@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prince Jha — Futuristic Portfolio</title>
+  <meta name="description" content="Futuristic portfolio of Prince Jha — AI/ML, Data Science, Full-Stack" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <!-- Devicon for tech icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <!-- Libraries (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+
+  <style>
+    /* =====================================================
+       FUTURISTIC PORTFOLIO - FINAL (fixed + polished)
+       - preserves all content
+       - fixes theme contrast issues
+       - keeps layout symmetry & accessibility
+       ===================================================== */
+
+    :root {
+      --bg: #05060a;
+      --panel: rgba(255,255,255,0.04);
+      --text-dark: #111111;
+      --text-light: #ecf3ff;
+      --muted-dark: #374151;
+      --muted-light: #9aa4b2;
+      --accent1: #06b6d4;
+      --accent2: #6d28d9;
+      --neon: #f472b6;
+      --panel-elev: rgba(255,255,255,0.02);
+      --card-border: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    /* Light / Dark theme variables */
+    :root[data-theme='dark'] {
+      --bg: #05060a;
+      --text: var(--text-light);
+      --muted: var(--muted-light);
+      --panel-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --card-border: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    :root[data-theme='light'] {
+      --bg: #f7f9fc;
+      --text: var(--text-dark);
+      --muted: var(--muted-dark);
+      --panel-bg: linear-gradient(180deg, rgba(11,11,12,0.03), rgba(11,11,12,0.02));
+      --card-border: rgba(0,0,0,0.06);
+      --glass: rgba(0,0,0,0.05);
+    }
+
+    /* Reset & base */
+    * { box-sizing: border-box; }
+    html,body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(109,40,217,0.06), transparent), var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    /* Layout container */
+    .wrap {
+      max-width: 1200px;
+      margin: 48px auto 40px;
+      padding: 28px;
+    }
+
+    /* Header */
+    header.site-header {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 18px;
+      z-index: 1200;
+      width: calc(100% - 80px);
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      border-radius: 14px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--card-border);
+    }
+    .brand { font-weight: 700; letter-spacing: .6px; font-size: 18px; }
+    .brand span { opacity: .75; color: var(--muted); }
+    nav.site-nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    nav.site-nav a {
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: background .18s, color .18s, transform .18s;
+    }
+    nav.site-nav a:hover { transform: translateY(-2px); color: var(--text); }
+    nav.site-nav a.active {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(109,40,217,0.14);
+    }
+
+    /* Global section / panel */
+    section.panel {
+      margin-top: 40px;
+      padding: 28px;
+      border-radius: 16px;
+      background: var(--panel-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 12px 40px rgba(2,6,23,0.5);
+    }
+    h2 { margin: 0 0 14px; font-size: 26px; color: var(--text); }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+      align-items: center;
+      margin-top: 40px;
+    }
+    .hero-left h1 { font-size: clamp(34px, 6vw, 56px); margin: 0 0 6px; }
+    .subtitle { font-weight: 600; color: var(--muted); margin: 0 0 14px; }
+    .typed {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+    .hero-ctas { display: flex; gap: 12px; margin-top: 18px; }
+    .btn {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn.primary {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(109,40,217,0.16);
+    }
+    .btn.ghost {
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .avatar {
+      width: 420px;
+      height: 520px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      position: relative;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.2));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    /* Info cards */
+    .info-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .info-card {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: var(--text);
+      min-width: 160px;
+    }
+    .info-card a { color: var(--muted); font-weight: 700; }
+
+    /* GRID helpers */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 18px; }
+    .card {
+      padding: 16px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--card-border);
+      transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+    }
+    .card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 18px 40px rgba(6,182,212,0.06); }
+
+    /* Projects */
+    .project-media {
+      height: 160px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(109,40,217,0.12), rgba(6,182,212,0.06));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .project-title { font-weight: 700; margin: 10px 0 6px; }
+    .project-desc { color: var(--muted); margin: 0 0 10px; }
+    .tags { display:flex; gap:8px; flex-wrap:wrap; }
+    .tag { padding:6px 8px; border-radius:999px; background: rgba(255,255,255,0.02); color: var(--muted); font-weight:600; }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(3,6,18,0.6);
+      z-index: 1500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+    .modal.open { opacity: 1; pointer-events: auto; }
+    .modal-card {
+      width: min(920px, 92%);
+      max-height: 86vh;
+      overflow: auto;
+      padding: 20px;
+      border-radius: 14px;
+      background: var(--panel-bg);
+      border: 1px solid var(--card-border);
+    }
+
+    /* Tech / stack */
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-top: 16px; }
+    .tech {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      font-size:14px;
+      transition: transform .18s, box-shadow .18s, background .3s;
+      color: var(--text);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--card-border);
+    }
+    .tech i { font-size:18px; filter: none; }
+    .tech:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(6,182,212,0.12); }
+
+    /* Certifications */
+    .certifications { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 14px; }
+    .cert-card {
+      display: block;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform .25s, box-shadow .25s, background .25s;
+    }
+    .cert-card span { display:block; margin-top:6px; font-size:13px; color: var(--muted); font-weight:500; }
+    .cert-card:hover { transform: translateY(-6px); background: linear-gradient(135deg, var(--accent1), var(--accent2)); color:#fff; box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
+    .cert-card:hover span { color: rgba(255,255,255,0.9); }
+
+    /* Achievements */
+    .achievements { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px; margin-top: 14px; }
+    .ach-card {
+      padding: 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .ach-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 14px 40px rgba(0,0,0,0.25); }
+    .ach-card .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255,255,255,0.2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Contact */
+    .contact-wrap { display: grid; grid-template-columns: 1fr 360px; gap: 18px; }
+    .field { display:flex; flex-direction: column; margin-bottom: 12px; }
+    .field input, .field textarea {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: transparent;
+      color: inherit;
+      outline: none;
+    }
+    .field label { margin-bottom: 6px; font-weight: 600; color: var(--muted); }
+    .send { display:inline-flex; align-items:center; gap:8px; }
+
+    footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 13px; padding: 20px; }
+
+    /* Cursor follower */
+    #cursor {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.12);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform .06s linear;
+    }
+
+    /* Project filters */
+    .project-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+    .filter-btn { padding:8px 10px; border-radius:10px; border:1px solid var(--card-border); background:transparent; cursor:pointer; font-weight:700; color:var(--muted); }
+    .filter-btn.active { background: linear-gradient(90deg, var(--accent1), var(--accent2)); color:#fff; box-shadow: 0 8px 30px rgba(109,40,217,0.12); }
+
+    /* Responsive tweaks */
+    @media (max-width: 1000px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar { width: 300px; height: 380px; margin: 0 auto; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; }
+      .avatar { width: 240px; height: 300px; }
+      nav.site-nav { gap: 6px; }
+      header.site-header { padding: 8px 12px; width: calc(100% - 32px); left: 50%; transform: translateX(-50%); }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="cursor" aria-hidden="true"></div>
+
+  <header class="site-header" role="banner" aria-label="Primary">
+    <a class="brand" href="#hero" aria-label="Home">Prince<span>Jha</span></a>
+    <nav class="site-nav" role="navigation" aria-label="Main navigation">
+      <a href="#about" data-link>About</a>
+      <a href="#skills" data-link>Skills</a>
+      <a href="#projects" data-link>Projects</a>
+      <a href="#experience" data-link>Experience</a>
+      <a href="#certifications" data-link>Certifications</a>
+      <a href="#contact" data-link>Contact</a>
+      <button id="theme-toggle" aria-label="Toggle theme" class="btn ghost">☀</button>
+    </nav>
+  </header>
+
+  <main class="wrap" id="hero" role="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="panel hero-left" aria-hidden="false">
+        <h1 id="hero-heading">Prince Jha</h1>
+        <p class="subtitle">B.Tech CSE (AI & DS) • <span id="typed-target" class="typed" aria-hidden="true"></span></p>
+        <p class="subtitle">Building intelligent systems, data products, and delightful UX.</p>
+
+        <div class="hero-ctas">
+          <a class="btn primary" id="download-resume" href="assets/resume.pdf" download aria-label="Download résumé">Download Resume</a>
+          <a class="btn ghost" href="#projects" aria-label="Explore projects">Explore Projects</a>
+        </div>
+
+        <div class="info-row" aria-hidden="false">
+          <div class="info-card" title="Phone">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92V21a1 1 0 0 1-1.11 1 19 19 0 0 1-8.63-3.07A19 19 0 0 1 3.08 7.74 19 19 0 0 1 0 0.9 1 1 0 0 1 1 0h4.09a1 1 0 0 1 1 .76c.12.87.36 1.71.71 2.53a1 1 0 0 1-.24 1.03L5.7 7.7a15 15 0 0 0 6.6 6.6l1.38-1.18a1 1 0 0 1 1.03-.24c.82.35 1.66.59 2.53.71a1 1 0 0 1 .76 1V22z" fill="currentColor"/></svg>
+            <a href="tel:+918826181378" aria-label="Call">+91 8826181378</a>
+          </div>
+          <div class="info-card" title="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v.2l-9 6-9-6V5z" fill="currentColor"/></svg>
+            <a href="mailto:princejha1378@gmail.com" aria-label="Email">princejha1378@gmail.com</a>
+          </div>
+          <div class="info-card" title="Location">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" fill="currentColor"/></svg>
+            <span>India — Open to remote internships</span>
+          </div>
+          <div class="info-card" title="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9H3V21H6V9ZM4.5 3.5A1.75 1.75 0 1 1 4.5 6.99 1.75 1.75 0 0 1 4.5 3.5zM21 21h-3v-6a3 3 0 0 0-6 0v6h-3V9h3v1.5a4.5 4.5 0 0 1 9 0V21z" fill="currentColor"/></svg>
+            <a href="https://www.linkedin.com/in/prince-jha-profile" target="_blank" rel="noopener" aria-label="LinkedIn profile">LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- short summary (from resume) -->
+        <div style="margin-top:18px">
+          <h3 style="margin:0 0 8px">Summary</h3>
+          <p style="color:var(--muted);margin:0">
+            I'm a B.Tech student (2022–2026) in Computer Science with a focus on Artificial Intelligence and Data Science.
+            I've completed internships in cybersecurity and software development, built ML models, dashboards, and chatbots,
+            and have hands-on experience with Python, C++, SQL, Power BI, OpenCV and network analysis tools like Wireshark.
+          </p>
+        </div>
+
+      </div>
+
+      <aside class="hero-right" aria-hidden="false">
+        <div class="avatar" data-tilt>
+          <img src="assets/profile.jpg" alt="Portrait of Prince Jha" width="420" height="520" />
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT (expanded) -->
+    <section id="about" class="panel" aria-labelledby="about-heading">
+      <h2 id="about-heading">About</h2>
+      <p style="color:var(--muted);max-width:860px">
+        I enjoy turning data into actionable products and building interfaces that make complex systems approachable.
+        My work spans computer vision (real-time systems), conversational AI (OpenAI integrations), and interactive data storytelling (Power BI & Python).
+        I focus on shipping reliable, human-centered solutions and learning continuously.
+      </p>
+    </section>
+
+    <!-- TECH STACK -->
+    <section id="skills" class="panel" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Tech Stack</h2>
+      <div class="tech-grid" role="list">
+        <!-- row 1 -->
+        <div class="tech" role="listitem"><i class="devicon-cplusplus-plain colored" aria-hidden="true"></i><span>C++</span></div>
+        <div class="tech" role="listitem"><i class="devicon-html5-plain colored" aria-hidden="true"></i><span>HTML5</span></div>
+        <div class="tech" role="listitem"><i class="devicon-javascript-plain colored" aria-hidden="true"></i><span>JavaScript</span></div>
+        <div class="tech" role="listitem"><i class="devicon-css3-plain colored" aria-hidden="true"></i><span>CSS3</span></div>
+        <div class="tech" role="listitem"><i class="devicon-python-plain colored" aria-hidden="true"></i><span>Python</span></div>
+        <div class="tech" role="listitem"><i class="devicon-firebase-plain colored" aria-hidden="true"></i><span>Firebase</span></div>
+        <div class="tech" role="listitem"><i class="devicon-googlecloud-plain colored" aria-hidden="true"></i><span>Google Cloud</span></div>
+        <div class="tech" role="listitem"><i class="devicon-azure-plain colored" aria-hidden="true"></i><span>Azure</span></div>
+
+        <!-- row 2 -->
+        <div class="tech"><i class="devicon-bootstrap-plain colored" aria-hidden="true"></i><span>Bootstrap</span></div>
+        <div class="tech"><i class="devicon-django-plain colored" aria-hidden="true"></i><span>Django</span></div>
+        <div class="tech"><i class="devicon-flask-original colored" aria-hidden="true"></i><span>Flask</span></div>
+        <div class="tech"><i class="devicon-nodejs-plain colored" aria-hidden="true"></i><span>Node.js</span></div>
+        <div class="tech"><i class="devicon-react-original colored" aria-hidden="true"></i><span>React</span></div>
+        <div class="tech"><i class="devicon-apache-plain colored" aria-hidden="true"></i><span>Apache</span></div>
+        <div class="tech"><i class="devicon-mongodb-plain colored" aria-hidden="true"></i><span>MongoDB</span></div>
+        <div class="tech"><i class="devicon-mysql-plain colored" aria-hidden="true"></i><span>MySQL</span></div>
+
+        <!-- row 3 -->
+        <div class="tech"><i class="devicon-canva-original colored" aria-hidden="true"></i><span>Canva</span></div>
+        <div class="tech"><i class="devicon-photoshop-plain colored" aria-hidden="true"></i><span>Photoshop</span></div>
+        <div class="tech"><i class="devicon-numpy-original colored" aria-hidden="true"></i><span>NumPy</span></div>
+        <div class="tech"><i class="devicon-pandas-original colored" aria-hidden="true"></i><span>Pandas</span></div>
+        <div class="tech"><i class="devicon-matplotlib-plain colored" aria-hidden="true"></i><span>Matplotlib</span></div>
+        <div class="tech"><i class="devicon-scikitlearn-plain colored" aria-hidden="true"></i><span>Scikit-learn</span></div>
+        <div class="tech"><i class="devicon-plotly-plain colored" aria-hidden="true"></i><span>Plotly</span></div>
+        <div class="tech"><i class="devicon-pytorch-original colored" aria-hidden="true"></i><span>PyTorch</span></div>
+
+        <!-- row 4 -->
+        <div class="tech"><i class="devicon-tensorflow-original colored" aria-hidden="true"></i><span>TensorFlow</span></div>
+        <div class="tech"><i class="devicon-scipy-original colored" aria-hidden="true"></i><span>SciPy</span></div>
+        <div class="tech"><i class="devicon-mlflow-plain colored" aria-hidden="true"></i><span>MLflow</span></div>
+        <div class="tech"><i class="devicon-git-plain colored" aria-hidden="true"></i><span>Git</span></div>
+        <div class="tech"><i class="devicon-github-original colored" aria-hidden="true"></i><span>GitHub</span></div>
+        <div class="tech"><i class="devicon-cmake-plain colored" aria-hidden="true"></i><span>CMake</span></div>
+        <div class="tech"><i class="devicon-twilio-plain colored" aria-hidden="true"></i><span>Twilio</span></div>
+        <div class="tech"><i class="devicon-matlab-plain colored" aria-hidden="true"></i><span>MATLAB</span></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="panel" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+
+      <!-- New: project filters / sub-categories -->
+      <div class="project-filters" role="tablist" aria-label="Project categories">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="filter-btn" data-filter="ai-ml" role="tab" aria-selected="false">AI / ML</button>
+        <button class="filter-btn" data-filter="webdev" role="tab" aria-selected="false">Web Development</button>
+        <button class="filter-btn" data-filter="data-analytics" role="tab" aria-selected="false">Data Analytics</button>
+      </div>
+
+<div class="grid" style="margin-top:12px" id="projects-grid">
+  <article class="card project" data-id="drowsiness" data-type="ai-ml">
+    <div class="project-media" aria-hidden="true">
+      <img src="assets/thumnails/drowsiness.jpg" alt="Drowsiness Detection System Thumbnail">
+    </div>
+    <div class="project-title">Drowsiness Detection System</div>
+    <p class="project-desc">Real-time computer vision system that detects driver drowsiness using eye-state analysis, and triggers SOS alerts via Twilio (SMS/call) including approximate location.</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Twilio</span></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn primary view-project" data-id="drowsiness" aria-label="View Drowsiness project">View</button>
+      <a class="btn ghost" href="https://github.com/princejha03/projects/tree/main/Drowsiness_Detection" aria-label="Drowsiness code">Code</a>
+    </div>
+  </article>
+
+  <article class="card project" data-id="gmail-automation" data-type="ai-ml">
+    <div class="project-media" aria-hidden="true">
+      <img src="assets/thumnails/gmail-automation.jpg" alt="Automatic Gmail Labeling Workflow Thumbnail">
+    </div>
+    <div class="project-title">Basic Automatic Gmail Email Labeling Workflow</div>
+    <p class="project-desc">Built an automated email labeling system using n8n, Gmail API, and OpenAI. The workflow fetches incoming emails, processes content with AI, and applies smart labels for better organization. Designed to reduce manual inbox management and streamline communication workflows.</p>
+    <div class="tags"><span class="tag">n8n</span><span class="tag">OpenAI</span><span class="tag">Gmail API</span></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn primary view-project" data-id="gmail-automation" aria-label="View Gmail project">View</button>
+      <a class="btn ghost" href="https://www.linkedin.com/posts/prince-jha-profile_n8n-openai-automation-activity-7358933840339374081-D_XU" aria-label="Gmail live">Live</a>
+    </div>
+  </article>
+
+  <article class="card project" data-id="chatbot" data-type="ai-ml">
+    <div class="project-media" aria-hidden="true">
+      <img src="assets/thumnails/chatbot.jpg" alt="Chatbot Project Thumbnail">
+    </div>
+    <div class="project-title">Chatbot with OpenAI API</div>
+    <p class="project-desc">Context-aware conversational agent with custom prompts and stateful context handling, implemented using OpenAI's API and Python wrappers.</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">OpenAI</span></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn primary view-project" data-id="chatbot" aria-label="View Chatbot project">View</button>
+      <a class="btn ghost" href="https://github.com/princejha03/projects/tree/main/pdf-chatbot" aria-label="Chatbot code">Code</a>
+    </div>
+  </article>
+
+  <article class="card project" data-id="dashboards" data-type="data-analytics">
+    <div class="project-media" aria-hidden="true">
+      <img src="assets/thumnails/uber-dashboard.jpg" alt="Uber Dashboard Thumbnail">
+    </div>
+    <div class="project-title">Uber Dashboards</div>
+    <p class="project-desc">Analyzed over 70,000 Uber ride records to uncover key insights related to revenue, ride cancellations, customer ratings, and vehicle types.</p>
+    <div class="tags"><span class="tag">Power BI</span><span class="tag">Python</span></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn primary view-project" data-id="dashboards" aria-label="View Dashboards project">View</button>
+      <a class="btn ghost" href="https://www.linkedin.com/posts/prince-jha-profile_powerbi-dataanalytics-uberdataanalysis-activity-7346066722275151873-pVUI" aria-label="Dashboards live">Live</a>
+    </div>
+  </article>
+
+  <article class="card project" data-id="dashboards" data-type="data-analytics">
+    <div class="project-media" aria-hidden="true">
+      <img src="assets/thumnails/spotify-dashboard.jpg" alt="Spotify Dashboard Thumbnail">
+    </div>
+    <div class="project-title">Spotify Data Analysis Dashboard</div>
+    <p class="project-desc">Created a Spotify-themed interactive dashboard in Power BI, analyzing 70,000+ tracks to uncover insights on music trends and listener behavior.</p>
+    <div class="tags"><span class="tag">Power BI</span><span class="tag">Python</span></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn primary view-project" data-id="dashboards" aria-label="View Dashboards project">View</button>
+      <a class="btn ghost" href="https://www.linkedin.com/posts/prince-jha-profile_powerbi-spotifyanalytics-dashboarddesign-activity-7350261949131071491-HkNw" aria-label="Dashboards live">Live</a>
+    </div>
+  </article>
+
+  <article class="card project" data-id="portfolio" data-type="webdev">
+    <div class="project-media" aria-hidden="true">
+    <img src="assets/thumnails/portfolio.jpg" alt="Portfolio Website Thumbnail">
+    </div>
+    <div class="project-title">Personal Portfolio Website</div>
+    <p class="project-desc">A responsive, accessible portfolio built with modern HTML/CSS and vanilla JavaScript. Demonstrates animations, performance techniques, and progressive enhancement.</p>
+    <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn primary view-project" data-id="portfolio" aria-label="View Portfolio project">View</button>
+      <a class="btn ghost" href="#" aria-label="Portfolio code">Code</a>
+    </div>
+  </article>
+</div>
+
+
+    <!-- EXPERIENCE & EDUCATION -->
+    <section id="experience" class="panel" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience & Education</h2>
+      <div class="timeline" style="margin-top:12px">
+        <article class="xp">
+          <strong>Varun Beverages Ltd (PepsiCo) — Software Intern</strong>
+          <div class="meta">Sep 2024 – Oct 2024 • Gurugram</div>
+          <ul>
+            <li>Developed responsive React interfaces to streamline internal operations and reduce manual data entry.</li>
+            <li>Built dashboards integrating APIs for supply-chain KPIs and analyzed operational data with Python/Excel.</li>
+          </ul>
+        </article>
+
+        <article class="xp">
+          <strong>DFIR IIMT — Cybersecurity Intern</strong>
+          <div class="meta">Jun 2024 – Aug 2024 • Greater Noida</div>
+          <ul>
+            <li>Monitored live network traffic using Wireshark and supported incident investigations and packet-level analysis.</li>
+            <li>Built a Python chatbot to surface real-time CERT advisories to the security team.</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3 style="margin-top:26px">Certifications</h3>
+      <div class="certifications">
+        <a href="https://media.geeksforgeeks.org/courses/certificates/08354d678e017b814be7f58dc0e0bbee.pdf" target="_blank" rel="noopener" class="cert-card">
+          <strong>Data Science BootCamp</strong>
+          <span>Geeks for Geeks 2025</span>
+        </a>
+        <a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=654E04D2E8F4DBC07724BCE4B7EECE4025CF172AD38C238BD89773DAAA9C6275" target="_blank" rel="noopener" class="cert-card">
+          <strong>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</strong>
+          <span>Oracle Cloud Infrastructure (OCI)• 2025</span>
+        </a>
+        <a href="https://www.linkedin.com/learning/certificates/1b51c8a6f32661a3fdb535424c9dc7aac4c64afecca475497bfe935bf832ffa9" target="_blank" rel="noopener" class="cert-card">
+          <strong>Career Essentials in Data Analysis </strong>
+          <span>Microsoft• 2025</span>
+        </a>
+        <a href="https://www.hackerrank.com/certificates/284df6dee2de" target="_blank" rel="noopener" class="cert-card">
+          <strong>Program with PL/SQL</strong>
+          <span>Hackerrank • 2023</span>
+        </a>
+          <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiI0OTUxIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvODc1NTA4N185MTI3NzU4MTc1NDY1NDY2MTUxNC5wbmciLCJ1c2VybmFtZSI6IlByaW5jZSBqaGEifQ%3D%3D&utm_source=shared-certificate&utm_medium=lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F7958%2Fn8n-Course%3A-No-Code-AI-Agent-Builder%2Fcertificate%2Fdownload-skillup&%24web_only=true&_branch_match_id=1307938129011672387&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1k%2FVdynxrMgpSc9wC0uyrytKTUstKsrMS49PKsovL04tsvUBqkpN8cwDAEpM43ZBAAAA" target="_blank" rel="noopener" class="cert-card">
+          <strong>n8n Agentic AI</strong>
+          <span>Simplilearn • 2025</span>
+        </a>
+        <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxNzIyIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvODUwODcwMl84ODM2NjUzMTc1MDcxMTU0NDAwNS5wbmciLCJ1c2VybmFtZSI6IlByaW5jZSBqaGEifQ%3D%3D&utm_source=shared-certificate&utm_medium=lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F4211%2FPower-BI-for-Beginners%2Fcertificate%2Fdownload-skillup&%24web_only=true&_branch_match_id=1307938129011672387&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1k%2FVTwo2qwgoCi8vCk2yrytKTUstKsrMS49PKsovL04tsvUBqkpN8cwDAOngMf5BAAAA" target="_blank" rel="noopener" class="cert-card">
+          <strong>Power BI</strong>
+          <span>Simplilearn• 2025</span>
+        </a>
+      </div>
+      <section id="leetcode" class="panel">
+        <h2>LeetCode Profile</h2>
+        <p>I regularly practice problem-solving and algorithmic coding on LeetCode. Here's my live stats card along with my earned badges:</p>
+        
+        <div class="leetcode-card">
+          <img
+            src="https://leetcard.jacoblin.cool/Princejha03_?theme=dark&ext=activity,badge"
+            alt="LeetCode Stats and Badges for Princejha03_"
+            loading="lazy">
+        </div>
+        
+        <a href="https://leetcode.com/u/Princejha03_/" class="btn ghost" target="_blank" rel="noopener">
+          View Full LeetCode Profile
+        </a>
+      </section>
+
+
+      <h3 style="margin-top:20px">Achievements</h3>
+      <div class="achievements">
+        <div class="ach-card">🏆 1st Place —Bharat Shikha Expo<span class="badge">2025</span></div>
+        <div class="ach-card">🥇 1st Place — NIET Hackathon <span class="badge">2024</span></div>
+        <div class="ach-card">🥉 3rd Place — Manav Rachna Hackathon <span class="badge">2024</span></div>
+        <div class="ach-card">🏆 1st Place — Amity Hackathon <span class="badge">2023</span></div>
+        <div class="ach-card">🥇 1st Place — GL Bajaj Hackathon <span class="badge">2023</span></div>
+        <div class="ach-card">📘 Math & Science Olympiad Winner <span class="badge">School</span></div>
+      </div>
+
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="panel" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact</h2>
+      <div class="contact-wrap" style="margin-top:12px">
+        <form id="contact-form" class="card" autocomplete="on" aria-label="Contact form">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" required placeholder="Your name" /></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="your@domain.com" /></div>
+          <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="6" required placeholder="Tell me about your project"></textarea></div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn primary send" type="submit">Send Message</button>
+            <div id="form-status" style="color:var(--muted);font-weight:700"></div>
+          </div>
+        </form>
+
+    <aside class="card" style="padding:18px">
+      <h3>Quick Links</h3>
+      <p style="color:var(--muted)">
+        <a href="https://www.linkedin.com/in/prince-jha-profile" target="_blank">LinkedIn</a> • 
+        <a href="https://github.com/princejha03" target="_blank">GitHub</a> • 
+        <a href="assets/resume_prince_jha.pdf" target="_blank">Résumé</a>
+      </p>
+
+      <div style="height:12px"></div>
+
+      <h4 style="margin:8px 0 6px">Contact</h4>
+      <p style="color:var(--muted);margin:0">
+        Phone: <a href="tel:+918826181378">+91 8826181378</a>
+      </p>
+      <p style="color:var(--muted);margin:0">
+        Email: <a href="mailto:princejha1378@gmail.com">princejha1378@gmail.com</a>
+      </p>
+    </aside>
+
+    </section>
+
+    <footer>
+      © 2025 Prince Jha — Built with ❤️ and code
+    </footer>
+  </main>
+
+  <!-- Project Modal -->
+  <div class="modal" id="project-modal" role="dialog" aria-hidden="true" aria-modal="true">
+    <div class="modal-card" role="document">
+      <button id="modal-close" class="btn ghost" style="float:right">Close</button>
+      <div id="modal-content" tabindex="0"></div>
+    </div>
+  </div>
+
+  <script>
+    /* =====================================================
+       APP SCRIPT - fixes, accessibility, smooth behaviors
+       - preserves all content
+       - theme fix for readable text in both modes
+       - improved scroll spy and modal handling
+       - added project category filtering (AI/ML, Web, Data)
+       ===================================================== */
+
+    // Theme handling (persist & apply)
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle');
+    const saved = localStorage.getItem('theme');
+    if (saved) root.setAttribute('data-theme', saved);
+    else root.setAttribute('data-theme', 'dark'); // default
+
+    function updateToggle() {
+      const mode = root.getAttribute('data-theme');
+      toggle.textContent = mode === 'light' ? '🌙' : '☀';
+      // ensure some UI contrast adjustments if necessary
+      document.querySelectorAll('.tech').forEach(t => {
+        // nothing to change — CSS variables handle color
+      });
+    }
+    updateToggle();
+
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateToggle();
+    });
+
+    // Typed.js for header microcopy
+    /* strings kept compact to match previous content */
+    new Typed('#typed-target', {
+      strings: ["AI/ML • Data Science • Full-Stack", "Computer Vision • LLMs • Dashboards", "Python • React • Power BI"],
+      typeSpeed: 40,
+      backSpeed: 30,
+      backDelay: 2000,
+      loop: true,
+      showCursor: true
+    });
+
+    // VanillaTilt for cards & avatar
+    try {
+      VanillaTilt.init(document.querySelectorAll('[data-tilt]'), { max: 8, speed: 400, glare: true, "max-glare": 0.12 });
+    } catch (e) { /* non-fatal if library missing */ }
+
+    // Cursor follower
+    const cursor = document.getElementById('cursor');
+    window.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    }, { passive: true });
+
+    // Projects modal data (preserve and extend from resume)
+    const projects = {
+      drowsiness: {
+        title: 'Drowsiness Detection System',
+        body: 'Built a real-time drowsiness detection system using computer vision to monitor eye state; triggers SOS via Twilio including location. Aimed at preventing road accidents. Stack: Python, OpenCV, Twilio.'
+      },
+      chatbot: {
+        title: 'Chatbot with OpenAI API',
+        body: 'Developed an intelligent chatbot using OpenAI’s API with context handling and a Python integration for real-time responses. Features: context windowing, fallback strategies, rate limiting safeguards.'
+      },
+      dashboards: {
+        title: 'Uber & Spotify Dashboards',
+        body: 'Interactive Power BI & Python dashboards analyzing 70k+ records to reveal trends, cancellations, revenue insights, and music analytics. Includes custom visuals and KPI tracking.'
+      },
+       dashboards: {
+        title: 'Spotify Data Analysis Dashboard',
+        body: 'Interactive Power BI & Python dashboards analyzing 70k+ records to reveal trends, cancellations, revenue insights, and music analytics. Includes custom visuals and KPI tracking.'
+      },
+      portfolio: {
+        title: 'Personal Portfolio Website',
+        body: 'A responsive portfolio site demonstrating accessibility, performance, animations, and progressive enhancement. Built with modern HTML/CSS and vanilla JavaScript.'
+      }
+    };
+
+    // Modal open/close logic
+    const modal = document.getElementById('project-modal');
+    const modalContent = document.getElementById('modal-content');
+    const modalClose = document.getElementById('modal-close');
+
+    function openProject(id) {
+      const p = projects[id];
+      if (!p) return;
+      modalContent.innerHTML = `
+        <h2 style="margin-top:0">${p.title}</h2>
+        <p style="color:var(--muted)">${p.body}</p>
+        <div style="margin-top:14px;display:flex;gap:10px">
+          <a class="btn primary" href="#" aria-label="Live demo">Live demo</a>
+          <a class="btn ghost" href="#" aria-label="Source code">Source</a>
+        </div>
+      `;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      // trap focus to modal (basic)
+      const focusable = modal.querySelectorAll('a,button,[tabindex],input,textarea');
+      if (focusable.length) focusable[0].focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    document.querySelectorAll('.view-project').forEach(b => {
+      b.addEventListener('click', (e) => {
+        const id = b.dataset.id;
+        openProject(id);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // Scroll spy / nav highlighting
+    const navLinks = document.querySelectorAll('[data-link]');
+    function onScroll() {
+      const pos = window.scrollY + 160; // offset for fixed header
+      document.querySelectorAll('section').forEach(sec => {
+        if (!sec.id) return;
+        const top = sec.offsetTop;
+        const bottom = top + sec.offsetHeight;
+        const link = document.querySelector(`nav [href="#${sec.id}"]`);
+        if (link) {
+          if (top <= pos && bottom > pos) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Contact form handling (EmailJS optional)
+    (function () {
+      if (window.emailjs) {
+        try { emailjs.init('YOUR_EMAILJS_USER_ID'); } catch (e) { /* ignore */ }
+      }
+    })();
+
+    const form = document.getElementById('contact-form');
+    const statusEl = document.getElementById('form-status');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // collect inputs safely
+        const name = (form.querySelector('[name="name"]') || {}).value || '';
+        const email = (form.querySelector('[name="email"]') || {}).value || '';
+        const message = (form.querySelector('[name="message"]') || {}).value || '';
+        if (!name || !email || !message) {
+          statusEl.textContent = 'Please fill all fields';
+          return;
+        }
+        const data = { from_name: name, reply_to: email, message: message };
+        statusEl.textContent = 'Sending...';
+        if (window.emailjs && emailjs.send) {
+          emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data).then(() => {
+            statusEl.textContent = 'Message sent ✅';
+            form.reset();
+            setTimeout(() => statusEl.textContent = '', 2500);
+          }, (err) => {
+            statusEl.textContent = 'Send failed — check console';
+            console.error(err);
+          });
+        } else {
+          // fallback simulated send
+          setTimeout(() => {
+            statusEl.textContent = 'Message sent (demo) ✅';
+            form.reset();
+            setTimeout(() => statusEl.textContent = '', 2200);
+          }, 900);
+        }
+      });
+    }
+
+    // Lazy-load images where supported
+    document.querySelectorAll('img').forEach(img => {
+      try { if ('loading' in HTMLImageElement.prototype) img.loading = 'lazy'; } catch (e) { /* ignore */ }
+    });
+
+    // Ensure accessible focus styles (basic)
+    (function ensureFocusOutline() {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        :focus { outline: 3px solid rgba(99,102,241,0.18); outline-offset: 2px; }
+        a:focus { outline: 3px solid rgba(99,102,241,0.18); outline-offset: 2px; }
+      `;
+      document.head.appendChild(style);
+    })();
+
+    // --- New: project filtering logic ---
+    (function projectFiltering() {
+      const buttons = document.querySelectorAll('.filter-btn');
+      const projectsGrid = document.getElementById('projects-grid');
+      const projectsEls = projectsGrid ? Array.from(projectsGrid.querySelectorAll('.project')) : [];
+
+      function applyFilter(filter) {
+        projectsEls.forEach(p => {
+          const type = p.dataset.type || '';
+          if (filter === 'all' || type === filter) {
+            p.style.display = '';
+            p.setAttribute('aria-hidden', 'false');
+          } else {
+            p.style.display = 'none';
+            p.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const f = btn.dataset.filter;
+          buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          applyFilter(f);
+        });
+      });
+
+      // initialise (show all)
+      applyFilter('all');
+    })();
+
+  </script>
+</body>
+</html>
